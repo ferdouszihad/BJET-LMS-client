@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a.active {
+  @apply text-primary border-b-4 border-primary;
+}
+
+a.btn.active {
+  @apply bg-primary text-primary-content;
+}
