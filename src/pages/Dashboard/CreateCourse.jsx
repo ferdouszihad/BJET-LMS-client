@@ -136,6 +136,7 @@ const CreateCourse = () => {
               id="thumbnail"
               {...register("thumbnail", { required: "Thumbnail is required" })}
               className="file-input file-input-bordered w-full"
+              accept=".jpg, .jpeg, .png"
             />
             {errors.thumbnail && (
               <span className="text-red-500 text-sm">

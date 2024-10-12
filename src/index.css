@@ -9,3 +9,6 @@ a.active {
 a.btn.active {
   @apply bg-primary text-primary-content;
 }
+.tab-active {
+  @apply bg-primary-content rounded-t-box outline-none;
+}

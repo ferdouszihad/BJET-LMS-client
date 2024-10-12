@@ -1,26 +1,34 @@
 import { useContext } from "react";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiSolidBookContent } from "react-icons/bi";
 import { CgFormatColor } from "react-icons/cg";
 import { FaBars, FaFan, FaGear } from "react-icons/fa6";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { MdGolfCourse } from "react-icons/md";
+import { PiPlus } from "react-icons/pi";
+import { SiNginxproxymanager } from "react-icons/si";
 
 const Dashboard = () => {
   const { logOut, user } = useContext(AuthContext);
 
   const teacherRoutes = [
     {
-      name: "My Courses",
-      path: "/create-course",
-      icon: <MdGolfCourse></MdGolfCourse>,
+      name: "Manage Course",
+      path: "/",
+      icon: <SiNginxproxymanager />,
     },
     {
-      name: "My Contents",
-      path: "/my-contents",
-      icon: <MdGolfCourse></MdGolfCourse>,
+      name: "Create Course",
+      path: "/create-course",
+      icon: <PiPlus></PiPlus>,
     },
+    {
+      name: "Create Module",
+      path: "/Create-Module",
+      icon: <BiSolidBookContent />,
+    },
+    
   ];
   const studentRoutes = [
     {
