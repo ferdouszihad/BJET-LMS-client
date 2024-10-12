@@ -1,13 +1,14 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "./useAuth";
+import { AuthContext } from "../providers/AuthProvider";
 
 const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
 const useAxiosSecure = () => {
   const navigate = useNavigate();
-  const { logOut } = useAuth();
+  const { logOut } = useContext(AuthContext);
 
   // request interceptor to add authorization header for every secure call to teh api
   axiosSecure.interceptors.request.use(
@@ -34,7 +35,7 @@ const useAxiosSecure = () => {
       // for 401 or 403 logout the user and move the user to the login
       if (status === 401 || status === 403) {
         await logOut();
-        navigate("/login");
+        navigate("/auth/login");
       }
       return Promise.reject(error);
     }

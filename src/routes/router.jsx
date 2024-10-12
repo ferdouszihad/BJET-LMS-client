@@ -14,6 +14,7 @@ import Dashboard from "../layouts/Dashboard";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import ThemeSetting from "../pages/Dashboard/ThemeSetting";
 import UserSettings from "../pages/Dashboard/UserSettings";
+import CreateCourse from "../pages/Dashboard/CreateCourse";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <DashboardHome></DashboardHome>,
+      },
+      {
+        path: "create-course",
+        element: <CreateCourse></CreateCourse>,
       },
       {
         path: "/dashboard/theme",

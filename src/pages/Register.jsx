@@ -140,6 +140,7 @@ const Register = () => {
               name="image"
               className="file-input file-input-bordered w-full "
               required
+              accept=".jpg, .jpeg, .png"
             />
           </div>
           {/* role  */}
