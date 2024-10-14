@@ -9,10 +9,11 @@ import useTeachingCourses from "../hooks/useTeachingCourses";
 const DashboardTeacher = () => {
   const { user } = useContext(AuthContext);
   const { courses, isCourseLoading } = useTeachingCourses();
+  console.log(courses);
+
   if (isCourseLoading) {
     return <Loading></Loading>;
   }
-  console.log(courses);
 
   return (
     <div>

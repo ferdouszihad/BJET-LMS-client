@@ -27,6 +27,7 @@ const CreateCourse = () => {
 
   const onSubmit = async (data) => {
     let { thumbnail, ...courseData } = data;
+    
     console.log(thumbnail, courseData);
 
     courseData = { ...courseData, students, teacher: [user?.email] };

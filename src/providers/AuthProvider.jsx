@@ -16,11 +16,12 @@ import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 export const AuthContext = createContext(null);
-const auth = getAuth(app);
+
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = (props = {}) => {
+  const auth = getAuth(app);
   const axiosPublic = useAxiosPublic();
   // console.log(app);
 
@@ -66,7 +67,6 @@ const AuthProvider = (props = {}) => {
   //   logout options
 
   const logOut = () => {
-    setLoading(true);
     return signOut(auth);
   };
 
@@ -85,6 +85,7 @@ const AuthProvider = (props = {}) => {
               })
               .catch((err) => {
                 console.log(err);
+                setLoading(false);
               });
           }
         });

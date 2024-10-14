@@ -7,7 +7,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Title from "../../components/Title";
 
 const CreateModule = () => {
-  const [value, setValue] = useState("");
+  const [dynamicText, setDynamicText] = useState("");
+  const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const [moduleType, setModuleType] = useState("");
   const [file, setFile] = useState(null);
@@ -25,8 +26,34 @@ const CreateModule = () => {
   } = useForm();
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]); // Append the file
+
+    // Use XMLHttpRequest to track file upload progress
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${import.meta.env.VITE_BASE_URL}upload/file`, true); // API route for uploading
+
+    // Track upload progress
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const percentComplete = Math.round((event.loaded / event.total) * 100); // Calculate percentage
+        setUploadPercentage(percentComplete); // Update progress state
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        console.log("File and content uploaded successfully");
+        setUploadPercentage(0); // Reset progress bar after completion
+      } else {
+        console.error("Upload failed");
+      }
+    };
+
+    xhr.send(formData); // Send form data to the server
   };
+
+  const handleFileUpload = (e) => () => {};
 
   // Handle form submission
   const onSubmit = async (data) => {
@@ -47,11 +74,12 @@ const CreateModule = () => {
     }
 
     if (moduleType === "dynamic") {
-      formData.append("dynamicContent", value); // Store rich text content
+      formData.append("dynamicContent", dynamicText);
+      // Store rich text content
     }
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
+
+    console.log(dynamicText);
+
     setIsModalOpen(false);
 
     // Handling publish mode
@@ -85,6 +113,14 @@ const CreateModule = () => {
   return (
     <div className="p-4">
       <Title>Create New Module</Title>
+      {uploadPercentage > 0 && (
+        <progress
+          className="progress progress-secondary "
+          value={uploadPercentage}
+          max="100"
+        ></progress>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         {/* Module Name */}
         <div className="form-control mb-4">
@@ -203,7 +239,13 @@ const CreateModule = () => {
         )}
 
         {moduleType === "dynamic" && (
-          <ReactQuill theme="snow" value={value} onChange={setValue} />
+          <ReactQuill
+            theme="snow"
+            value={dynamicText}
+            onChange={(content) => setDynamicText(content)}
+            className="textarea textarea-bordered"
+            placeholder="Enter dynamic text here..."
+          />
         )}
 
         {/* Publish Now and Publish Later */}

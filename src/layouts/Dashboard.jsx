@@ -28,7 +28,11 @@ const Dashboard = () => {
       path: "/Create-Module",
       icon: <BiSolidBookContent />,
     },
-    
+    {
+      name: "Create Content",
+      path: "/create-content",
+      icon: <BiSolidBookContent />,
+    },
   ];
   const studentRoutes = [
     {

@@ -3,7 +3,6 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FaFan } from "react-icons/fa6";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SocialLogin from "../components/SocialLogin";
 
 const Login = () => {
   const [error, setError] = useState({});
@@ -95,7 +94,6 @@ const Login = () => {
               </Link>
             </p>
           </div>
-          <SocialLogin setError={setError}></SocialLogin>
         </form>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaFan } from "react-icons/fa6";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SocialLogin from "../components/SocialLogin";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -231,7 +230,7 @@ const Register = () => {
             <p className="text-sm text-center py-2">
               Allready have account?{" "}
               <Link
-                to="/login"
+                to="/auth/login"
                 state={location.state}
                 className="underline text-primary"
               >
@@ -239,7 +238,6 @@ const Register = () => {
               </Link>
             </p>
           </div>
-          <SocialLogin></SocialLogin>
         </form>
       </div>
     </div>

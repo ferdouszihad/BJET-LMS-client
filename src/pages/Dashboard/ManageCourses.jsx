@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import CourseInfo from "../../components/CourseInfo";
+import ManageModule from "./ManageModule";
 
 const ManageCourses = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,7 +20,7 @@ const ManageCourses = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["manageCourses", user?.email],
+    queryKey: ["manageCourses", user?.email, id],
     enabled: !loading,
     // Fetch the data from the API
     queryFn: async () => {
@@ -54,10 +55,7 @@ const ManageCourses = () => {
           <CourseInfo course={data} refetch={refetch}></CourseInfo>
         </TabPanel>
         <TabPanel>
-          <div className="p-4 bg-base-100 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-2">Modules</h2>
-            <p>This is the Modules content.</p>
-          </div>
+          <ManageModule course={data} refetch={refetch}></ManageModule>
         </TabPanel>
         <TabPanel>
           <div className="p-4 bg-base-100 rounded-lg shadow-md">

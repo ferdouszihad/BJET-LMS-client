@@ -17,6 +17,8 @@ import UserSettings from "../pages/Dashboard/UserSettings";
 import CreateCourse from "../pages/Dashboard/CreateCourse";
 import ManageCourses from "../pages/Dashboard/ManageCourses";
 import CreateModule from "../pages/Dashboard/CreateModule";
+import CreateNewModule from "../pages/CreateNewModule";
+import CreateContent from "../pages/CreateContent";
 
 const router = createBrowserRouter([
   {
@@ -36,9 +38,10 @@ const router = createBrowserRouter([
         path: "create-course",
         element: <CreateCourse></CreateCourse>,
       },
+
       {
-        path: "create-module",
-        element: <CreateModule></CreateModule>,
+        path: "/module/create-content/:id",
+        element: <CreateContent></CreateContent>,
       },
       {
         path: "/manage-course/:id",
